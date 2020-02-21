@@ -28,10 +28,10 @@ public final class FileProcessor {
 		line = reader.readLine();
 	}
 
-	public Integer poll() throws NumberFormatException, IOException {
+	public String poll() throws IOException {
 		if (null == line) return null;
 
-		Integer newValue = Integer.parseInt(line.trim());
+		String newValue = line.trim();
 		line = reader.readLine();
 		return newValue;
 	}
