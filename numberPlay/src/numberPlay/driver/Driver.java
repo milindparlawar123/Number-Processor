@@ -1,5 +1,8 @@
 package numberPlay.driver;
 
+import java.io.IOException;
+import java.nio.file.InvalidPathException;
+
 import numberPlay.Filter.FilterI;
 import numberPlay.Filter.FloatingFilter;
 import numberPlay.Filter.IntegerFilter;
@@ -10,6 +13,7 @@ import numberPlay.observer.ObserverI;
 import numberPlay.observer.TopKNumbersObserver;
 import numberPlay.subject.NumberProcessor;
 import numberPlay.subject.SubjectI;
+import numberPlay.util.FileProcessor;
 
 /**
  * @author John Doe TODO update the author name.
@@ -31,7 +35,7 @@ public class Driver {
 
 			System.err.printf("Error: Incorrect number of arguments. Program accepts %d arguments.",
 					REQUIRED_NUMBER_OF_ARGS);
-			//System.exit(0);
+			// System.exit(0);
 		}
 
 		// FIXME Create an instance of each of the classes implementing PersisterI and
@@ -45,63 +49,47 @@ public class Driver {
 		FilterI integerFilter = new IntegerFilter();
 		FilterI floatingFilter = new FloatingFilter();
 		FilterI processCompleteFilter = new ProcessCompleteFilter();
-		ObserverI numberAverageO = new NumberAverageObserver(3);
-		ObserverI numberPeaksO = new NumberPeaksObserver();
-		ObserverI topKNumbersO = new TopKNumbersObserver(3);
 		SubjectI numberProcessor = new NumberProcessor();
-		numberProcessor.register(numberAverageO, integerFilter);
-		numberProcessor.register(numberPeaksO, integerFilter);
-		numberProcessor.register(topKNumbersO, integerFilter);
-		
-		
-		numberProcessor.register(numberPeaksO, floatingFilter);
-		numberProcessor.register(topKNumbersO, floatingFilter);
-		numberProcessor.register(numberAverageO, processCompleteFilter);
-		numberProcessor.register(numberPeaksO, processCompleteFilter);
-		numberProcessor.register(topKNumbersO, processCompleteFilter);
-		
-		
-		String[] ss= {"1"
-		,"2"
-		,"1.8"
-		,"2"
-		,"2.2"
-		,"3"
-		,"3.45"
-		,"4"
-		,"4.65"
-		,"4.6"
-		,"5"
-		,"6"
-		,"6.8","7"};
-  for(String numberStr: ss) {
+		ObserverI numberAverageO;
 		try {
-			//FileProcessor fileProcessor = new FileProcessor(args[0]);
-			//String numberStr = fileProcessor.poll();
+			numberAverageO = new NumberAverageObserver(3, "numAvg.txt");
+			ObserverI numberPeaksO = new NumberPeaksObserver("numPeaks.txt");
+			ObserverI topKNumbersO = new TopKNumbersObserver(3, "topKnum.txt");
+			numberProcessor.register(numberAverageO, integerFilter);
+			numberProcessor.register(numberPeaksO, integerFilter);
+			numberProcessor.register(topKNumbersO, integerFilter);
+			numberProcessor.register(numberPeaksO, floatingFilter);
+			numberProcessor.register(topKNumbersO, floatingFilter);
+			numberProcessor.register(numberAverageO, processCompleteFilter);
+			numberProcessor.register(numberPeaksO, processCompleteFilter);
+			numberProcessor.register(topKNumbersO, processCompleteFilter);
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+		try {
+			FileProcessor fileProcessor = new FileProcessor("input.txt");
+			String numberStr = null;
 			Number num = null;
-
+			while ((numberStr=fileProcessor.poll()) != null) {
+				try {
+					num = Integer.parseInt(numberStr);
+					numberProcessor.process(num, Enum.INTEGER_EVENT);
+				} catch (NumberFormatException e1) {
+					num = Float.parseFloat(numberStr);
+					numberProcessor.process(num, Enum.FLOATING_POINT_EVENT);
+				}
+			}
 			if (numberStr == null) {
+				fileProcessor.close();
+				num = null;;
 				numberProcessor.process(num, Enum.PROCESSING_COMPLETE);
 			}
 
-			try {
-				num = Integer.parseInt(numberStr);
-				numberProcessor.process(num, Enum.INTEGER_EVENT);
-			} catch (NumberFormatException e1) {
-				num = Float.parseFloat(numberStr);
-				numberProcessor.process(num, Enum.FLOATING_POINT_EVENT);
-			}
-
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (InvalidPathException | SecurityException | IOException e2) {
+			e2.printStackTrace();
 		}
-  }
-  Number num = null;
 
 
-		numberProcessor.process(num, Enum.PROCESSING_COMPLETE);
-	
 		// FIXME Instantiate the observers, providing the necessary filter and the
 		// results object.
 

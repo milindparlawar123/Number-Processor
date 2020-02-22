@@ -5,7 +5,6 @@ public class IntegerFilter implements FilterI {
 	@Override
 	public boolean check(Enum tag) {
 		if(tag.toString().equals("INTEGER_EVENT")) {
-			//System.out.println("tag");
 			return true;
 		}
 		return false;

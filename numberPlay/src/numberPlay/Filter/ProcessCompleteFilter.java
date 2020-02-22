@@ -10,4 +10,9 @@ public class ProcessCompleteFilter implements FilterI{
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "ProcessCompleteFilter []";
+	}
+
 }
