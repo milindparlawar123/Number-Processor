@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import numberPlay.util.Constants;
+
 /**
  * @author Milind
  * below class is to store running average of numbers and to write numbers
@@ -31,6 +33,7 @@ public class RunningAverageData implements PersisterI, RunningAverageResultsI {
 			this.fileWriter = new BufferedWriter(new FileWriter(file));
 
 		} catch (IOException e) {
+			System.err.println(Constants.ERROR_OPENING_FILE);
 			e.printStackTrace();
 			System.exit(0);
 		} finally {
@@ -60,6 +63,7 @@ public class RunningAverageData implements PersisterI, RunningAverageResultsI {
 				this.fileWriter.write(data.get(i).toString());
 				this.fileWriter.write("\n");
 			} catch (IOException e) {
+				System.err.println(Constants.ERROR_WRITING_FILE);
 				e.printStackTrace();
 				System.exit(0);
 			}finally{}
@@ -75,6 +79,7 @@ public class RunningAverageData implements PersisterI, RunningAverageResultsI {
 		try {
 			this.fileWriter.close();
 		} catch (IOException e) {
+			System.err.println(Constants.ERROR_CLOSING_FILE);
 			e.printStackTrace();
 			System.exit(0);
 		}

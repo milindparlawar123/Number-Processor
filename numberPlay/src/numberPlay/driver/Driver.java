@@ -13,7 +13,9 @@ import numberPlay.observer.ObserverI;
 import numberPlay.observer.TopKNumbersObserver;
 import numberPlay.subject.NumberProcessor;
 import numberPlay.subject.SubjectI;
+import numberPlay.util.Constants;
 import numberPlay.util.FileProcessor;
+import numberPlay.validator.DriverValidator;
 
 /**
  * @author John Doe TODO update the author name.
@@ -27,34 +29,38 @@ public class Driver {
 		 * that, below condition is used FIXME Refactor commandline validation using the
 		 * validation design taught in class.
 		 */
-		final int REQUIRED_NUMBER_OF_ARGS = 6;
-		if ((args.length != REQUIRED_NUMBER_OF_ARGS) || (args[0].equals("${inputNumStream}"))
-				|| (args[1].equals("${runAvgWindowSize}")) || (args[2].equals("${runAvgOutFile}"))
-				|| (args[3].equals("${k}")) || (args[4].equals("${topKNumOutFile}"))
-				|| (args[5].equals("${numPeaksOutFile}"))) {
 
-			System.err.printf("Error: Incorrect number of arguments. Program accepts %d arguments.",
-					REQUIRED_NUMBER_OF_ARGS);
-			// System.exit(0);
+		// below try block to validate arguments
+		try {
+			new DriverValidator(args.length, args);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(0);
+		} finally {
+
 		}
+		/*
+		 * final int REQUIRED_NUMBER_OF_ARGS = 6; if ((args.length !=
+		 * REQUIRED_NUMBER_OF_ARGS) || (args[0].equals("${inputNumStream}")) ||
+		 * (args[1].equals("${runAvgWindowSize}")) ||
+		 * (args[2].equals("${runAvgOutFile}")) || (args[3].equals("${k}")) ||
+		 * (args[4].equals("${topKNumOutFile}")) ||
+		 * (args[5].equals("${numPeaksOutFile}"))) {
+		 * 
+		 * System.err.
+		 * printf("Error: Incorrect number of arguments. Program accepts %d arguments.",
+		 * REQUIRED_NUMBER_OF_ARGS); System.exit(0); }
+		 */
 
-		// FIXME Create an instance of each of the classes implementing PersisterI and
-		// the
-		// corresponding ResultsI interface.
-		// Observers use these objects to dump data to be stored and eventually
-		// persisted
-		// to the corresponding output file.
-
-		// FIXME Instantiate the subject.
 		FilterI integerFilter = new IntegerFilter();
 		FilterI floatingFilter = new FloatingFilter();
 		FilterI processCompleteFilter = new ProcessCompleteFilter();
 		SubjectI numberProcessor = new NumberProcessor();
 		ObserverI numberAverageO;
 		try {
-			numberAverageO = new NumberAverageObserver(3, "numAvg.txt");
-			ObserverI numberPeaksO = new NumberPeaksObserver("numPeaks.txt");
-			ObserverI topKNumbersO = new TopKNumbersObserver(3, "topKnum.txt");
+			numberAverageO = new NumberAverageObserver(3, args[2]);
+			ObserverI numberPeaksO = new NumberPeaksObserver(args[5]);
+			ObserverI topKNumbersO = new TopKNumbersObserver(3, args[4]);
 			numberProcessor.register(numberAverageO, integerFilter);
 			numberProcessor.register(numberPeaksO, integerFilter);
 			numberProcessor.register(topKNumbersO, integerFilter);
@@ -64,17 +70,17 @@ public class Driver {
 			numberProcessor.register(numberPeaksO, processCompleteFilter);
 			numberProcessor.register(topKNumbersO, processCompleteFilter);
 		} catch (Exception e2) {
+			System.err.println(Constants.ERROR_IN_REGISTER_OBSERVERS);
 			e2.printStackTrace();
 			System.exit(0);
-		}
-		finally {
-			
+		} finally {
+
 		}
 		try {
-			FileProcessor fileProcessor = new FileProcessor("input.txt");
+			FileProcessor fileProcessor = new FileProcessor(args[0]);
 			String numberStr = null;
 			Number num = null;
-			while ((numberStr=fileProcessor.poll()) != null) {
+			while ((numberStr = fileProcessor.poll()) != null) {
 				try {
 					num = Integer.parseInt(numberStr);
 					numberProcessor.process(num, Enum.INTEGER_EVENT);
@@ -83,37 +89,27 @@ public class Driver {
 						num = Float.parseFloat(numberStr);
 						numberProcessor.process(num, Enum.FLOATING_POINT_EVENT);
 					} catch (NumberFormatException e) {
-						//input number is not valid
+						System.err.println(Constants.ERROR_INVALID_NUMBER);
 						e.printStackTrace();
-					}finally {
-						
+					} finally {
+
 					}
-					
 				}
 			}
 			if (numberStr == null) {
 				fileProcessor.close();
-				num = null;;
+				num = null;
 				numberProcessor.process(num, Enum.PROCESSING_COMPLETE);
 			}
 
 		} catch (InvalidPathException | SecurityException | IOException e2) {
+			System.err.println(Constants.ERROR);
 			e2.printStackTrace();
 			System.exit(0);
-		}finally{
-			
+		} finally {
+
 		}
 
-
-		// FIXME Instantiate the observers, providing the necessary filter and the
-		// results object.
-
-		// FIXME Register each observer with the subject for the necessary set of
-		// events.
-
-		// FIXME Delegate control to a separate utility class/method that provides
-		// numbers one at a time, from the FileProcessor,
-		// to the subject.
 	}
 }
 
