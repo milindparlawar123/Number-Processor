@@ -47,7 +47,23 @@ ant run -buildfile numberPlay/src/build.xml -DinputNumStream="input.txt" -DrunAv
 
 -----------------------------------------------------------------------
 ## Description:
+1. Driver class takes 6 arguments - input file, average window size, running average output file, top k numbers, top k output file and peaks output file.
+2. Driver validator class validates to check whether provided inputs are valid or not.
+3. Number processor registers observers with filter as key.
+4. Driver class reads number and pass it to number processor
+5. Number processor based on type of number, calls observers.
+6. Observers take number and process it and stores it in data structure
+7. when process complete event gets called then observers provide command to other classes to write stored data into output files.
 
+Data Structure: 
+ I have used BlockingQueue and PriorityQueue. And worst case time complexity is o(logn) 
+
+References:
+
+https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html
+https://docs.oracle.com/javase/7/docs/api/java/util/PriorityQueue.html
+https://www.journaldev.com/20601/java-bufferedwriter 
+https://www.journaldev.com/19879/java-bufferedreade
 
 -----------------------------------------------------------------------
 ### Academic Honesty statement:
