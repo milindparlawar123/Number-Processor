@@ -18,7 +18,7 @@ public class Constants {
 	public static final String ERROR_IN_REGISTER_OBSERVERS = "exception occured while registering observers";
 	public static final String ERROR_INVALID_ARGUMENTS = "invalid argumnets ";
 	public static final String ERROR_ALL_ARG_FILES_REQUIRED = "provide all 4 files: input.txt , run-avg-out.txt , top-k-out.txt and Running average window size and Max size of top K numbers ";
-	public static final String ERROR_DUPLICATE_FILES = "four files should not be same";
+	public static final String ERROR_DUPLICATE_FILES = "two files should not be same";
 	
 	public static final String INTEGER_EVENT="INTEGER_EVENT";
 	public static final String FLOATING_POINT_EVENT="FLOATING_POINT_EVENT";
