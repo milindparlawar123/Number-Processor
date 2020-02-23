@@ -5,15 +5,35 @@ import numberPlay.util.NumberPeaksResultsI;
 import numberPlay.util.PersisterI;
 
 public class NumberPeaksObserver implements ObserverI {
+	/**
+	 * prevNumber is used to compare against incoming number
+	 * like to see whether incoming number is greater or not
+	 */
 	private Double prevNumber = Double.MIN_VALUE;
+	/**
+	 * numberPeaksResult is to call store method
+	 */
 	private NumberPeaksResultsI numberPeaksResult;
+	/**
+	 * numberPeaksResultWrite is to call write and close method
+	 */
 	private PersisterI numberPeaksResultWrite;
 
+	/**
+	 * @param inputFilePath is output text file name
+	 * below constructor is for to do initialize objects only once 
+	 */
 	public NumberPeaksObserver(String inputFilePath) {
 		this.numberPeaksResult = new NumberPeaksData(inputFilePath);
 		this.numberPeaksResultWrite = (PersisterI) this.numberPeaksResult;
 	}
 
+	/**
+	 *below method will check incoming number is greater than minimum number or not
+	 *basically below method logic is to to find peak number.
+	 *if peak is found then it will call store method.
+	 *Once done with all numbers, it will call write method
+	 */
 	@Override
 	public void update(Number n) {
 

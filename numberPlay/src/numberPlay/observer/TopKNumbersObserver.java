@@ -11,11 +11,28 @@ import numberPlay.util.TopKNumbersData;
 import numberPlay.util.TopKNumbersResultsI;
 
 public class TopKNumbersObserver implements ObserverI {
+	/**
+	 * windowSize is for keep all numbers within boundary
+	 */
 	private int windowSize;
+	/**
+	 * priority queue is to store numbers and delete least number
+	 */
 	PriorityQueue<Double> priorityQueue;
+	/**
+	 * topKNumbersData is to call store method
+	 */
 	private TopKNumbersResultsI topKNumbersData;
+	/**
+	 * topKNumbersDataWrite is to call write and close method
+	 */
 	private PersisterI topKNumbersDataWrite;
 
+	/**
+	 * @param windowSize incoming size
+	 * @param inputFilePath incoming output file name
+	 * below constructor is to initialize queue and data members 
+	 */
 	public TopKNumbersObserver(int windowSize, String inputFilePath) {
 		super();
 		this.windowSize = windowSize;
@@ -24,6 +41,11 @@ public class TopKNumbersObserver implements ObserverI {
 		this.topKNumbersDataWrite = (PersisterI) this.topKNumbersData;
 	}
 
+	/**
+	 *below method is to find top k numbers and call store method to store all
+	 *top k numbers in descending order
+	 *and once done with all numbers, it calls write method
+	 */
 	@Override
 	public void update(Number n) {
 		if (n == null) {
@@ -39,6 +61,10 @@ public class TopKNumbersObserver implements ObserverI {
 
 	}
 
+	/**
+	 * @param pq is incoming queue 
+	 * @return it will return ArrayList in sorted descending order
+	 */
 	public List<Double> getListDscOrder(PriorityQueue<Double> pq) {
 		List ls = new ArrayList<Double>();
 		Iterator value = pq.iterator();

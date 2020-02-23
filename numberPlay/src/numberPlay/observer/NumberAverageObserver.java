@@ -10,11 +10,29 @@ import numberPlay.util.RunningAverageData;
 import numberPlay.util.RunningAverageResultsI;
 
 public class NumberAverageObserver implements ObserverI {
+	/**
+	 * windowSize is max size of queue
+	 */
 	private int windowSize;
+	/**
+	 * blockingQueue is used to store numbers and remove 
+	 */
 	private BlockingQueue<Integer> blockingQueue;
+	/**
+	 * runningAverageResult is to call store method 
+	 */
 	private RunningAverageResultsI runningAverageResult;
+	/**
+	 * runningAverageWrite is to call write and close method
+	 */
 	private PersisterI runningAverageWrite;
 
+	/**
+	 * @param windowSize is fixed size of queue
+	 * @param inputFilePath is output text file name
+	 * @throws FileNotFoundException
+	 * below constructor is for to do initialize objects only once 
+	 */
 	public NumberAverageObserver(int windowSize, String inputFilePath) throws FileNotFoundException {
 		super();
 		this.windowSize = windowSize;
@@ -23,6 +41,12 @@ public class NumberAverageObserver implements ObserverI {
 		this.runningAverageWrite = (PersisterI) this.runningAverageResult;
 	}
 
+	/**
+	 * @param n is input number
+	 *below update method is to store n in queue and
+	 *call store method after calculating average of queue(elements present in queue)
+	 *and finally when all numbers read completes, it calls write method
+	 */
 	@Override
 	public void update(Number n) {
 
@@ -41,6 +65,10 @@ public class NumberAverageObserver implements ObserverI {
 
 	}
 
+	/**
+	 * @return this is helper method to calculate average of numbers which are present in
+	 * queue
+	 */
 	private Double calculateAverage() {
 		Iterator itr = this.blockingQueue.iterator();
 		Integer total = 0;
