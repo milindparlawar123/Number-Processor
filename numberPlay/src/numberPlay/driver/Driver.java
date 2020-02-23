@@ -57,9 +57,9 @@ public class Driver {
 		SubjectI numberProcessor = new NumberProcessor();
 		ObserverI numberAverageO;
 		try {
-			numberAverageO = new NumberAverageObserver(3, args[2]);
+			numberAverageO = new NumberAverageObserver(Integer.parseInt(args[1]), args[2]);
 			ObserverI numberPeaksO = new NumberPeaksObserver(args[5]);
-			ObserverI topKNumbersO = new TopKNumbersObserver(3, args[4]);
+			ObserverI topKNumbersO = new TopKNumbersObserver(Integer.parseInt(args[3]), args[4]);
 			numberProcessor.register(numberAverageO, integerFilter);
 			numberProcessor.register(numberPeaksO, integerFilter);
 			numberProcessor.register(topKNumbersO, integerFilter);
