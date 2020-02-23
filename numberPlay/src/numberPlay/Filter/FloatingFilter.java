@@ -1,5 +1,7 @@
 package numberPlay.Filter;
 
+import numberPlay.util.Constants;
+
 /**
  * @author Milind 
  * below filter class is to check whether
@@ -15,7 +17,7 @@ public class FloatingFilter implements FilterI {
 	 */
 	@Override
 	public boolean check(Enum tag) {
-		if (tag.toString().equals("FLOATING_POINT_EVENT")) {
+		if (tag.toString().equals(Constants.FLOATING_POINT_EVENT)) {
 			return true;
 		}
 		return false;

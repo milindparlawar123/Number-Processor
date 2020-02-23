@@ -1,5 +1,7 @@
 package numberPlay.Filter;
 
+import numberPlay.util.Constants;
+
 /**
  * @author Milind
  * below filter class is to check whether
@@ -16,7 +18,7 @@ public class ProcessCompleteFilter implements FilterI {
 	 */
 	@Override
 	public boolean check(Enum tag) {
-		if (tag.toString().equals("PROCESSING_COMPLETE")) {
+		if (tag.toString().equals(Constants.PROCESSING_COMPLETE)) {
 			return true;
 		}
 		return false;

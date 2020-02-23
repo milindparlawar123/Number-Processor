@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import numberPlay.util.Constants;
 import numberPlay.util.PersisterI;
 import numberPlay.util.RunningAverageData;
 import numberPlay.util.RunningAverageResultsI;
@@ -88,7 +89,7 @@ public class NumberAverageObserver implements ObserverI {
 		}
 
 		return Double.parseDouble(
-				String.format("%.2f", (total * 1.0 / (this.windowSize - blockingQueue.remainingCapacity()))));
+				String.format(Constants.ROUND_TO_TWO_DECIMAL, (total * 1.0 / (this.windowSize - blockingQueue.remainingCapacity()))));
 	}
 
 	@Override

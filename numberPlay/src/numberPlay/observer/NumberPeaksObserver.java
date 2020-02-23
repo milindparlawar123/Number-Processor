@@ -1,5 +1,6 @@
 package numberPlay.observer;
 
+import numberPlay.util.Constants;
 import numberPlay.util.NumberPeaksData;
 import numberPlay.util.NumberPeaksResultsI;
 import numberPlay.util.PersisterI;
@@ -57,7 +58,7 @@ public class NumberPeaksObserver implements ObserverI {
 				}
 
 			} else {
-				this.numberPeaksResult.store(Double.parseDouble(String.format("%.2f", this.prevNumber)));
+				this.numberPeaksResult.store(Double.parseDouble(String.format(Constants.ROUND_TO_TWO_DECIMAL, this.prevNumber)));
 				this.prevNumber = val;
 			}
 

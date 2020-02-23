@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import numberPlay.util.Constants;
 import numberPlay.util.PersisterI;
 import numberPlay.util.TopKNumbersData;
 import numberPlay.util.TopKNumbersResultsI;
@@ -76,7 +77,7 @@ public class TopKNumbersObserver implements ObserverI {
 		Iterator value = pq.iterator();
 		while (value.hasNext()) {
 
-			ls.add(Double.parseDouble(String.format("%.2f", value.next())));
+			ls.add(Double.parseDouble(String.format(Constants.ROUND_TO_TWO_DECIMAL, value.next())));
 		}
 		Collections.sort(ls, Collections.reverseOrder());
 		return ls;

@@ -29,7 +29,6 @@ public class Driver {
 		 * that, below condition is used FIXME Refactor commandline validation using the
 		 * validation design taught in class.
 		 */
-
 		// below try block to validate arguments
 		try {
 			new DriverValidator(args.length, args);

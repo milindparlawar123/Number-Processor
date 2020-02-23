@@ -20,10 +20,20 @@ public class Constants {
 	public static final String ERROR_ALL_ARG_FILES_REQUIRED = "provide all 4 files: input.txt , run-avg-out.txt , top-k-out.txt and Running average window size and Max size of top K numbers ";
 	public static final String ERROR_DUPLICATE_FILES = "four files should not be same";
 	
+	public static final String INTEGER_EVENT="INTEGER_EVENT";
+	public static final String FLOATING_POINT_EVENT="FLOATING_POINT_EVENT";
+	public static final String PROCESSING_COMPLETE="PROCESSING_COMPLETE";
 	public static final String ERROR_RUN_AVG_WINDOW_SIZE = "Running average window size is invalid ";
 	public static final String ERROR_TOP_K_NUM = "Max size of the list of the current top K numbers is invalid ";
 	public static final String ERROR_RUN_AVG_WINDOW_SIZE_GREATER_THAN_ONE = "Running average window size is invalid, provide greater than 0";
 	public static final String ERROR_TOP_K_NUM_GREATER_THAN_ONE = "Max size of the list of the current top K numbers is invalid, provide greater than 0";
+	
+	public static final String ARG_0="${inputNumStream}";
+	public static final String ARG_1="${runAvgWindowSize}";
+	public static final String ARG_2="${runAvgOutFile}";
+	public static final String ARG_3="${k}";
+	public static final String ARG_4="${topKNumOutFile}";
+	public static final String ARG_5="${numPeaksOutFile}";
 	
 	
 

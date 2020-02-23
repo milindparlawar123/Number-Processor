@@ -59,7 +59,7 @@ public class NumberPeaksData implements PersisterI, NumberPeaksResultsI {
 		for (int i = 0; i < data.size(); i++) {
 			try {
 				this.fileWriter.write(data.get(i).toString());
-				this.fileWriter.write("\n");
+				this.fileWriter.write(Constants.NEW_LINE);
 			} catch (IOException e) {
 				System.err.println(Constants.ERROR_WRITING_FILE);
 				e.printStackTrace();
