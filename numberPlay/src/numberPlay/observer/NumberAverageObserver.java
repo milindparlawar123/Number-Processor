@@ -9,6 +9,12 @@ import numberPlay.util.PersisterI;
 import numberPlay.util.RunningAverageData;
 import numberPlay.util.RunningAverageResultsI;
 
+/**
+ * @author Milind
+ * below class is NumberAverageObserver class which listens to integer event
+ * and calls other method of classes to do further operations on number
+ *
+ */
 public class NumberAverageObserver implements ObserverI {
 	/**
 	 * windowSize is max size of queue

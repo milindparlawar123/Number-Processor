@@ -1,5 +1,12 @@
 package numberPlay.Filter;
 
+/**
+ * @author Milind 
+ * below filter class is to check whether
+ * provided tag is floating point event  or not, accordingly it will return 
+ * true or false
+ *
+ */
 public class FloatingFilter implements FilterI {
 
 	/**

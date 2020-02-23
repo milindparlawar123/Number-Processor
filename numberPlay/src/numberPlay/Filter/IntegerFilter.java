@@ -1,5 +1,12 @@
 package numberPlay.Filter;
 
+/**
+ * @author Milind
+ * below filter class is to check whether
+ * provided tag is Integer Event or not, accordingly it will return 
+ * true or false
+ *
+ */
 public class IntegerFilter implements FilterI {
 
 	/**

@@ -1,5 +1,12 @@
 package numberPlay.Filter;
 
+/**
+ * @author Milind
+ * below filter class is to check whether
+ * provided tag is processing complete event  or not, accordingly it will return 
+ * true or false
+ *
+ */
 public class ProcessCompleteFilter implements FilterI {
 
 	/**

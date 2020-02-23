@@ -4,6 +4,13 @@ import numberPlay.util.NumberPeaksData;
 import numberPlay.util.NumberPeaksResultsI;
 import numberPlay.util.PersisterI;
 
+/**
+ * @author Milind
+ * below class is NumberPeaksObserver class which listens to integer event
+ * and floating point event
+ * and calls other method of classes to do further operations on number
+ *
+ */
 public class NumberPeaksObserver implements ObserverI {
 	/**
 	 * prevNumber is used to compare against incoming number

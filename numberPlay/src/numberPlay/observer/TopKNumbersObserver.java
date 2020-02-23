@@ -10,6 +10,12 @@ import numberPlay.util.PersisterI;
 import numberPlay.util.TopKNumbersData;
 import numberPlay.util.TopKNumbersResultsI;
 
+/**
+ * @author Milind
+ * below class is TopKNumbersObserver class which listens to integer event
+ * and floating point event
+ * and calls other method of classes to do further operations on number
+ */
 public class TopKNumbersObserver implements ObserverI {
 	/**
 	 * windowSize is for keep all numbers within boundary

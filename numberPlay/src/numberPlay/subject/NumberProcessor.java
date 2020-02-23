@@ -8,18 +8,36 @@ import java.util.Map;
 import numberPlay.Filter.FilterI;
 import numberPlay.observer.ObserverI;
 
+/**
+ * @author milind this class is to notify observers
+ * based on the type of event triggered
+ *
+ */
 public class NumberProcessor implements SubjectI {
+	/**
+	 * observers is to store filter as key and observers as values
+	 */
 	Map<FilterI, List<ObserverI>> observers;
 
+	/**
+	 * below constructor initializes observers 
+	 */
 	public NumberProcessor() {
 		this.observers = new HashMap<FilterI, List<ObserverI>>();
 	}
 
+	/**
+	 *process method will be called from driver class to notify
+	 *observers
+	 */
 	@Override
 	public void process(Number n, Enum e) {
 		notifyAll(n, e);
 	}
 
+	/**
+	 *below method is to register observers
+	 */
 	@Override
 	public void register(ObserverI o, FilterI f) {
 		if (!observers.containsKey(f)) {
@@ -28,6 +46,10 @@ public class NumberProcessor implements SubjectI {
 		observers.get(f).add(o);
 	}
 
+	/**
+	 *based on filter like if filter returns true then observers of particular key
+	 *will be notified else not.
+	 */
 	@Override
 	public void notifyAll(Number n, Enum e) {
 
