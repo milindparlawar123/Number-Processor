@@ -65,6 +65,10 @@ public class Driver {
 			numberProcessor.register(topKNumbersO, processCompleteFilter);
 		} catch (Exception e2) {
 			e2.printStackTrace();
+			System.exit(0);
+		}
+		finally {
+			
 		}
 		try {
 			FileProcessor fileProcessor = new FileProcessor("input.txt");
@@ -75,8 +79,16 @@ public class Driver {
 					num = Integer.parseInt(numberStr);
 					numberProcessor.process(num, Enum.INTEGER_EVENT);
 				} catch (NumberFormatException e1) {
-					num = Float.parseFloat(numberStr);
-					numberProcessor.process(num, Enum.FLOATING_POINT_EVENT);
+					try {
+						num = Float.parseFloat(numberStr);
+						numberProcessor.process(num, Enum.FLOATING_POINT_EVENT);
+					} catch (NumberFormatException e) {
+						//input number is not valid
+						e.printStackTrace();
+					}finally {
+						
+					}
+					
 				}
 			}
 			if (numberStr == null) {
@@ -87,6 +99,9 @@ public class Driver {
 
 		} catch (InvalidPathException | SecurityException | IOException e2) {
 			e2.printStackTrace();
+			System.exit(0);
+		}finally{
+			
 		}
 
 

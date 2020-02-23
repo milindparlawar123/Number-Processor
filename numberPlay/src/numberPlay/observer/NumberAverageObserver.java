@@ -42,7 +42,7 @@ public class NumberAverageObserver implements ObserverI {
 	public NumberAverageObserver(int windowSize, String inputFilePath) throws FileNotFoundException {
 		super();
 		this.windowSize = windowSize;
-		this.blockingQueue = new ArrayBlockingQueue<Integer>(3);
+		this.blockingQueue = new ArrayBlockingQueue<Integer>(windowSize);
 		this.runningAverageResult = new RunningAverageData(inputFilePath);
 		this.runningAverageWrite = (PersisterI) this.runningAverageResult;
 	}
