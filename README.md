@@ -1,5 +1,5 @@
 # CSX42: Assignment 2
-## Name: 
+## Name: Milind Keshav Parlawar
 
 -----------------------------------------------------------------------
 -----------------------------------------------------------------------
@@ -41,6 +41,9 @@ ant run -buildfile numberPlay/src/build.xml \
 -DtopKNumOutFile="<path of output file to which the top K numbers are written>" \
 -DnumPeaksOutFile="<path of output file to which the peaks in the number stream are written>"
 ```
+for exammple :
+ant run -buildfile numberPlay/src/build.xml -DinputNumStream="input.txt" -DrunAvgWindowSize="3" -DrunAvgOutFile="run-avg-out.txt" -Dk="3" -DtopKNumOutFile="top-k-out.txt" -DnumPeaksOutFile="peaks-out.txt"
+
 
 -----------------------------------------------------------------------
 ## Description:
@@ -56,6 +59,6 @@ I am involved in plagiarism or cheating an official form will be
 submitted to the Academic Honesty Committee of the Watson School to
 determine the action that needs to be taken. "
 
-Date: [ADD_DATE_HERE]
+Date: 02/23/2020
 
 
